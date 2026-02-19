@@ -17,7 +17,7 @@ export default function OrderCode({ code, orderId }: OrderCodeProps) {
   }
 
   const handleShare = async () => {
-    if (navigator.share) {
+    if ('share' in navigator) {
       await navigator.share({
         title: 'Tu Código de Pedido',
         text: `Mi código de pedido: ${code}`,
@@ -40,7 +40,7 @@ export default function OrderCode({ code, orderId }: OrderCodeProps) {
         >
           {copied ? '✓ Copiado' : 'Copiar código'}
         </button>
-        {typeof navigator !== 'undefined' && navigator.share && (
+        {typeof navigator !== 'undefined' && 'share' in navigator && (
           <button
             onClick={handleShare}
             className="w-full px-4 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors"
