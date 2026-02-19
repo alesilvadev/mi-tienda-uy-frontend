@@ -195,10 +195,10 @@ export default function Home() {
 
   if (status === 'loading') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-700">Inicializando pedido...</p>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 bg-blue-600 rounded-full animate-spin mx-auto"></div>
+          <p className="text-gray-700 font-semibold">Inicializando pedido...</p>
         </div>
       </div>
     )
@@ -206,12 +206,12 @@ export default function Home() {
 
   if (status === 'error') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-        <div className="bg-white rounded-lg p-6 max-w-md text-center">
-          <p className="text-red-600 font-semibold mb-4">Error: {error}</p>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-red-50 to-red-100 p-4">
+        <div className="bg-white rounded-2xl p-8 max-w-md text-center shadow-lg border-2 border-red-300">
+          <p className="text-red-600 font-semibold mb-6 text-lg">Error: {error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 font-semibold transition-colors"
           >
             Reintentar
           </button>
@@ -223,18 +223,18 @@ export default function Home() {
   if (status === 'order-complete') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white p-4 flex flex-col items-center justify-center">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <div className="text-6xl mb-4">✓</div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">¡Pedido Cerrado!</h1>
-            <p className="text-gray-600">Tu pedido ha sido guardado exitosamente</p>
+        <div className="w-full max-w-md space-y-6">
+          <div className="text-center space-y-2">
+            <div className="text-7xl mb-4">✓</div>
+            <h1 className="text-4xl font-bold text-green-600">¡Pedido Cerrado!</h1>
+            <p className="text-gray-600 text-lg">Tu pedido ha sido guardado exitosamente</p>
           </div>
 
           <OrderCode code={orderCode} orderId={orderId} />
 
           <button
             onClick={handleNewOrder}
-            className="w-full mt-6 px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-lg"
           >
             Nuevo Pedido
           </button>
@@ -244,30 +244,34 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-md mx-auto">
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Mi Tienda UY</h1>
-          <p className="text-gray-600 text-sm">Autogestión de Pedidos en Local</p>
+    <div className="min-h-screen bg-gray-50 pb-24">
+      <div className="sticky top-0 bg-white border-b-2 border-gray-200 p-4 z-10">
+        <div className="max-w-md mx-auto">
+          <div className="text-center mb-4">
+            <h1 className="text-3xl font-bold text-blue-600">Mi Tienda UY</h1>
+            <p className="text-gray-600 text-sm">Autogestión de Pedidos en Local</p>
+          </div>
         </div>
+      </div>
 
+      <div className="max-w-md mx-auto p-4 space-y-4">
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-300 rounded-lg text-red-700 text-sm">
-            {error}
+          <div className="p-4 bg-red-50 border-2 border-red-300 rounded-lg text-red-700 text-sm space-y-2">
+            <p className="font-semibold">{error}</p>
             <button
               onClick={() => setError('')}
-              className="ml-2 font-semibold hover:underline"
+              className="text-xs font-semibold underline hover:no-underline"
             >
-              Cerrar
+              Descartar
             </button>
           </div>
         )}
 
-        <div className="bg-white rounded-lg p-4 mb-4 shadow-sm">
+        <div className="bg-white rounded-xl p-4 shadow-md border-2 border-gray-200">
           <ProductSearch onProductFound={handleProductFound} onError={handleProductError} />
         </div>
 
-        <div className="bg-white rounded-lg p-4 mb-4 shadow-sm">
+        <div className="bg-white rounded-xl p-4 shadow-md border-2 border-gray-200">
           <Cart
             items={items}
             onUpdateQuantity={handleUpdateQuantity}
@@ -278,10 +282,10 @@ export default function Home() {
           />
         </div>
 
-        {items.length > 0 && (
+        {items.filter(i => i.listType === 'buy').length > 0 && (
           <button
             onClick={handleCloseOrder}
-            className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+            className="w-full sticky bottom-4 px-4 py-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors text-lg shadow-lg"
           >
             Cerrar Pedido
           </button>

@@ -32,7 +32,7 @@ export default function ProductSearch({ onProductFound, onError }: ProductSearch
       onProductFound(product)
       setSku('')
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Product not found'
+      const message = err instanceof Error ? err.message : 'Producto no encontrado'
       onError(message)
       setSku('')
     } finally {
@@ -42,20 +42,21 @@ export default function ProductSearch({ onProductFound, onError }: ProductSearch
 
   return (
     <form onSubmit={handleSearch} className="w-full">
-      <div className="flex gap-2">
+      <label className="block text-sm font-semibold text-gray-700 mb-2">Buscar Producto por Código</label>
+      <div className="flex gap-3">
         <input
           type="text"
           value={sku}
           onChange={(e) => setSku(e.target.value.toUpperCase())}
-          placeholder="Ingresa código del producto"
-          className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:outline-none focus:border-blue-500"
+          placeholder="Ej: SKU001"
+          className="flex-1 px-4 py-3 text-base font-medium border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           disabled={loading}
           autoFocus
         />
         <button
           type="submit"
           disabled={loading || !sku.trim()}
-          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors"
+          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'Buscando...' : 'Buscar'}
         </button>

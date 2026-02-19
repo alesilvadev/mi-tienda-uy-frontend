@@ -41,7 +41,7 @@ export default function CashierOrderForm({ onOrderFound, onError, token }: Cashi
       onOrderFound(order as CashierOrder)
       setCode('')
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Order not found'
+      const message = err instanceof Error ? err.message : 'Pedido no encontrado'
       onError(message)
       setCode('')
     } finally {
@@ -50,21 +50,22 @@ export default function CashierOrderForm({ onOrderFound, onError, token }: Cashi
   }
 
   return (
-    <form onSubmit={handleSearch} className="w-full">
-      <div className="flex gap-2">
+    <form onSubmit={handleSearch} className="w-full space-y-3">
+      <label className="block text-sm font-semibold text-gray-700">Ingresa Código de Pedido</label>
+      <div className="flex gap-3">
         <input
           type="text"
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
-          placeholder="Ingresa código de pedido"
-          className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:outline-none focus:border-blue-500"
+          placeholder="Ej: ABC123XYZ"
+          className="flex-1 px-4 py-3 text-base font-medium border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           disabled={loading}
           autoFocus
         />
         <button
           type="submit"
           disabled={loading || !code.trim()}
-          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors"
+          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'Buscando...' : 'Buscar'}
         </button>

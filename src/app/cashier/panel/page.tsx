@@ -53,10 +53,10 @@ export default function CashierPanel() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-700">Cargando...</p>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 bg-blue-600 rounded-full animate-spin mx-auto"></div>
+          <p className="text-gray-700 font-semibold">Cargando panel...</p>
         </div>
       </div>
     )
@@ -64,35 +64,35 @@ export default function CashierPanel() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800">Panel de Caja</h1>
-            <p className="text-gray-600 text-sm">Mi Tienda UY</p>
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex justify-between items-center bg-white rounded-xl p-6 shadow-md border-2 border-gray-200">
+          <div className="space-y-1">
+            <h1 className="text-4xl font-bold text-blue-600">Panel de Caja</h1>
+            <p className="text-gray-600 text-lg">Mi Tienda UY</p>
           </div>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+            className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors"
           >
             Salir
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-300 rounded-lg text-red-700 text-sm">
-            {error}
+          <div className="p-4 bg-red-50 border-2 border-red-300 rounded-lg text-red-700 text-sm space-y-2">
+            <p className="font-semibold">{error}</p>
             <button
               onClick={() => setError('')}
-              className="ml-2 font-semibold hover:underline"
+              className="text-xs font-semibold underline hover:no-underline"
             >
-              Cerrar
+              Descartar
             </button>
           </div>
         )}
 
         {!order ? (
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Buscar Pedido</h2>
+          <div className="bg-white rounded-xl p-6 shadow-md border-2 border-gray-200 space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900">Buscar Pedido</h2>
             <CashierOrderForm
               onOrderFound={setOrder}
               onError={setError}
@@ -109,7 +109,7 @@ export default function CashierPanel() {
             />
             <button
               onClick={handleNewSearch}
-              className="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-lg"
             >
               Buscar Otro Pedido
             </button>
